@@ -2,94 +2,52 @@ package AbstractFactoryPattern
 
 import "fmt"
 
-type Sugar interface {
-	SetSugarCategory()
+type Clothes interface {
+	Prepare()
+	Tailor()
 }
 
-type Milk interface {
-	SetMilkCategory()
-}
-
-type CoffeeFactory interface {
-	AddSugar() Sugar
-	AddMilk() Milk
+type ClothesFactory interface {
+	MakeClothes() Clothes
 	GetDescription() string
 }
 
-type FamilySugar struct{}
+type KimonoClothes struct{}
 
-func (oneself FamilySugar) SetSugarCategory() {
-	fmt.Println("Japan's sugar")
+func (k KimonoClothes) Prepare() {
+	fmt.Println("Prepare the kimono materials")
 }
 
-type FamilyMilk struct{}
-
-func (oneself FamilyMilk) SetMilkCategory() {
-	fmt.Println("Japan's milk")
+func (k KimonoClothes) Tailor() {
+	fmt.Println("Just tailor with Japan's technique")
 }
 
-type SevenSugar struct{}
+type FiftyPercentClothes struct{}
 
-func (oneself SevenSugar) SetSugarCategory() {
-	fmt.Println("Taiwan's sugar")
+func (f FiftyPercentClothes) Prepare() {
+	fmt.Println("Prepare the common materials of Taiwan")
 }
 
-type SevenMilk struct{}
-
-func (oneself SevenMilk) SetMilkCategory() {
-	fmt.Println("Taiwan's milk")
+func (f FiftyPercentClothes) Tailor() {
+	fmt.Println("Just tailor with Taiwan's technique")
 }
 
-type StarbucksSugar struct{}
+type JapanFactory struct{}
 
-func (oneself StarbucksSugar) SetSugarCategory() {
-	fmt.Println("American's sugar")
+func (j *JapanFactory) MakeClothes() Clothes {
+	return KimonoClothes{}
 }
 
-type StarbucksMilk struct{}
-
-func (oneself StarbucksMilk) SetMilkCategory() {
-	fmt.Println("American's milk")
+func (j *JapanFactory) GetDescription() string {
+	return "Kimono"
 }
 
-type FamilyFactory struct{}
+type TaiwanFactory struct{}
 
-func (oneself FamilyFactory) AddSugar() Sugar {
-	return FamilySugar{}
+func (t *TaiwanFactory) MakeClothes() Clothes {
+	return FiftyPercentClothes{}
 }
 
-func (oneself FamilyFactory) AddMilk() Milk {
-	return FamilyMilk{}
-}
-
-func (oneself FamilyFactory) GetDescription() string {
-	return "Let's cafe"
-}
-
-type SevenFactory struct{}
-
-func (oneself SevenFactory) AddSugar() Sugar {
-	return SevenSugar{}
-}
-
-func (oneself SevenFactory) AddMilk() Milk {
-	return SevenMilk{}
-}
-
-func (oneself SevenFactory) GetDescription() string {
-	return "City cafe"
-}
-
-type StarbucksFactory struct{}
-
-func (oneself StarbucksFactory) AddSugar() Sugar {
-	return StarbucksSugar{}
-}
-
-func (oneself StarbucksFactory) AddMilk() Milk {
-	return StarbucksMilk{}
-}
-
-func (oneself StarbucksFactory) GetDescription() string {
-	return "Starbucks"
+func (t *TaiwanFactory) GetDescription() string {
+	return "Fifty Percent"
 }

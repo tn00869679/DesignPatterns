@@ -7,17 +7,25 @@ import (
 )
 
 func TestAbstractFactoryPattern(t *testing.T) {
-	factory := getCoffeeFactory()
+	var factory AbstractFactoryPattern.ClothesFactory
 
-	sugar := factory.AddSugar()
-	milk := factory.AddMilk()
+	clothesStyle := buyClothes()
+	switch clothesStyle {
+	case "Japan":
+		factory = &AbstractFactoryPattern.JapanFactory{}
+	case "Taiwan":
+		factory = &AbstractFactoryPattern.TaiwanFactory{}
+	default:
+		panic("Undefined clothes style")
+	}
 
-	sugar.SetSugarCategory()
-	milk.SetMilkCategory()
+	clothes := factory.MakeClothes()
+	clothes.Prepare()
+	clothes.Tailor()
 
-	fmt.Println("A cup of ", factory.GetDescription())
+	fmt.Println("Clothes type :", factory.GetDescription())
 }
 
-func getCoffeeFactory() AbstractFactoryPattern.CoffeeFactory {
-	return AbstractFactoryPattern.StarbucksFactory{}
+func buyClothes() string {
+	return "Taiwan"
 }
