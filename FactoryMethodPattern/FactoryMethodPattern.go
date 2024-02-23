@@ -15,23 +15,23 @@ type Tea struct {
 	hasCaffeine    bool
 }
 
-func (beverage *Tea) GetSweetnessLevel() string {
-	return fmt.Sprintf("%d percent sugar", beverage.sweetnessLevel)
+func (t *Tea) GetSweetnessLevel() string {
+	return fmt.Sprintf("%d percent sugar", t.sweetnessLevel)
 }
 
-func (beverage *Tea) SetSweetnessLevel(percent int) {
-	beverage.sweetnessLevel = percent
+func (t *Tea) SetSweetnessLevel(percent int) {
+	t.sweetnessLevel = percent
 }
 
-func (beverage *Tea) HasCaffeine() bool {
-	return beverage.hasCaffeine
+func (t *Tea) HasCaffeine() bool {
+	return t.hasCaffeine
 }
 
-func (beverage *Tea) SetCaffeine(hasCaffeine bool) {
-	beverage.hasCaffeine = hasCaffeine
+func (t *Tea) SetCaffeine(hasCaffeine bool) {
+	t.hasCaffeine = hasCaffeine
 }
 
-func (beverage *Tea) GetDescription() string {
+func (t *Tea) GetDescription() string {
 	return "Green tea"
 }
 
@@ -40,23 +40,23 @@ type Coffee struct {
 	hasCaffeine    bool
 }
 
-func (beverage *Coffee) GetSweetnessLevel() string {
-	return fmt.Sprintf("%d percent sugar", beverage.sweetnessLevel)
+func (c *Coffee) GetSweetnessLevel() string {
+	return fmt.Sprintf("%d percent sugar", c.sweetnessLevel)
 }
 
-func (beverage *Coffee) SetSweetnessLevel(percent int) {
-	beverage.sweetnessLevel = percent
+func (c *Coffee) SetSweetnessLevel(percent int) {
+	c.sweetnessLevel = percent
 }
 
-func (beverage *Coffee) HasCaffeine() bool {
-	return beverage.hasCaffeine
+func (c *Coffee) HasCaffeine() bool {
+	return c.hasCaffeine
 }
 
-func (beverage *Coffee) SetCaffeine(hasCaffeine bool) {
-	beverage.hasCaffeine = hasCaffeine
+func (c *Coffee) SetCaffeine(hasCaffeine bool) {
+	c.hasCaffeine = hasCaffeine
 }
 
-func (beverage *Coffee) GetDescription() string {
+func (c *Coffee) GetDescription() string {
 	return "Latte"
 }
 
