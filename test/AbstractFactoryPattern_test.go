@@ -2,7 +2,6 @@ package test
 
 import (
 	"DesignPatterns/AbstractFactoryPattern"
-	"fmt"
 	"testing"
 )
 
@@ -11,21 +10,23 @@ func TestAbstractFactoryPattern(t *testing.T) {
 
 	clothesStyle := buyClothes()
 	switch clothesStyle {
-	case "Japan":
-		factory = &AbstractFactoryPattern.JapanFactory{}
-	case "Taiwan":
-		factory = &AbstractFactoryPattern.TaiwanFactory{}
+	case "Office":
+		factory = &AbstractFactoryPattern.OfficeFactory{}
+	case "Home":
+		factory = &AbstractFactoryPattern.HomeFactory{}
 	default:
 		panic("Undefined clothes style")
 	}
 
-	clothes := factory.MakeClothes()
-	clothes.Prepare()
-	clothes.Tailor()
+	shirts := factory.MakeShirts()
+	shirts.HasSleeves()
+	shirts.SuitableFor()
 
-	fmt.Println("Clothes type :", factory.GetDescription())
+	pants := factory.MakePants()
+	pants.FullLength()
+	pants.SuitableFor()
 }
 
 func buyClothes() string {
-	return "Taiwan"
+	return "Home"
 }

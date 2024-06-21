@@ -2,52 +2,77 @@ package AbstractFactoryPattern
 
 import "fmt"
 
-type Clothes interface {
-	Prepare()
-	Tailor()
+type Shirts interface {
+	HasSleeves()
+	SuitableFor()
+}
+
+type Pants interface {
+	FullLength()
+	SuitableFor()
 }
 
 type ClothesFactory interface {
-	MakeClothes() Clothes
-	GetDescription() string
+	MakeShirts() Shirts
+	MakePants() Pants
 }
 
-type KimonoClothes struct{}
+type WorkShirts struct{}
 
-func (k KimonoClothes) Prepare() {
-	fmt.Println("Prepare the kimono materials")
+func (w WorkShirts) HasSleeves() {
+	fmt.Println("Yes!! long sleeves.")
 }
 
-func (k KimonoClothes) Tailor() {
-	fmt.Println("Just tailor with Japan's technique")
+func (w WorkShirts) SuitableFor() {
+	fmt.Println("Office wear.")
 }
 
-type FiftyPercentClothes struct{}
+type WorkPants struct{}
 
-func (f FiftyPercentClothes) Prepare() {
-	fmt.Println("Prepare the common materials of Taiwan")
+func (w WorkPants) FullLength() {
+	fmt.Println("Pants of 100 cm.")
 }
 
-func (f FiftyPercentClothes) Tailor() {
-	fmt.Println("Just tailor with Taiwan's technique")
+func (w WorkPants) SuitableFor() {
+	fmt.Println("Office wear.")
 }
 
-type JapanFactory struct{}
+type VacationShirts struct{}
 
-func (j *JapanFactory) MakeClothes() Clothes {
-	return KimonoClothes{}
+func (v VacationShirts) HasSleeves() {
+	fmt.Println("No!! no sleeves.")
 }
 
-func (j *JapanFactory) GetDescription() string {
-	return "Kimono"
+func (v VacationShirts) SuitableFor() {
+	fmt.Println("Home wear.")
 }
 
-type TaiwanFactory struct{}
+type VacationPants struct{}
 
-func (t *TaiwanFactory) MakeClothes() Clothes {
-	return FiftyPercentClothes{}
+func (v VacationPants) FullLength() {
+	fmt.Println("Pants of 50 cm.")
 }
 
-func (t *TaiwanFactory) GetDescription() string {
-	return "Fifty Percent"
+func (v VacationPants) SuitableFor() {
+	fmt.Println("Home wear.")
+}
+
+type OfficeFactory struct{}
+
+func (o *OfficeFactory) MakeShirts() Shirts {
+	return WorkShirts{}
+}
+
+func (o *OfficeFactory) MakePants() Pants {
+	return WorkPants{}
+}
+
+type HomeFactory struct{}
+
+func (h *HomeFactory) MakeShirts() Shirts {
+	return VacationShirts{}
+}
+
+func (h *HomeFactory) MakePants() Pants {
+	return VacationPants{}
 }
